@@ -13,7 +13,7 @@ const auth=require('./routes/signin');
 app.use(bodyparser.json());
 
 app.use("/getexams",getexams);
-app.use("/classtimetable",timetable);
+app.use("/clstimetable",timetable);
 app.use("/getteachers",teacherinfo);
 app.use("/homeworks",gethomeworks);
 app.use("/authenticate",auth);

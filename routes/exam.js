@@ -9,8 +9,8 @@ route.post("/", async (req, res) => {
   try {
     if(model1==null)
     model1 = exammodel.exp(req.body.clgname+"exams");
-     var response= await model.find({},{timetable:0});
-      if(response==null)
+     var response= await model1.find({},{timetable:0});
+      if(response.length==0)
       res.status(404).send("notfound").end();
     res.status(200).send(response);
   } catch (error){
@@ -22,7 +22,7 @@ route.post("/timetable",async (req,res)=>{
 try {
   if(model1==null)
   model1 = exammodel.exp(req.body.clgname+"exams");
- var response= await model.findOne({"examname":req.body.examname},{timetable:1}).lean();
+ var response= await model1.findOne({"examname":req.body.examname}).lean();
  if(response==null)
  res.status(404).send("notfound").end();
  res.status(200).send(response);

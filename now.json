@@ -3,42 +3,72 @@
     "builds":[
         {
             "src":"./index.js",
-            "use":"@now/node-server"
+            "use":"@now/node-server@0.4.26"
         }
     ],
     "routes":[
         {
-            "src":"/about/",
+            "src":"/getexams",
             "methods":["POST"],
             "status":200,
             "dest":"/"
         },
         {
-            "src":"/getregusers",
+            "src":"/clstimetable",
             "status":200, 
             "methods":["POST"],
             "dest":"/"
         },
         {
-            "src":"/attended-workshop",
+            "src":"/getteachers",
             "methods":["POST"],
             "status":200,
             "dest":"/"
         },
         {
-            "src":"/register",
+            "src":"/homeworks",
             "methods":["POST"],
             "status":200,
             "dest":"/"
         },
         {
-            "src":"/register/spotreg",
+            "src":"/queries",
             "methods":["POST"],
             "status":200,
             "dest":"/"
         },
         {
-            "src":"/confirm",
+            "src":"/authenticate",
+            "methods":["POST"],
+            "status":200,
+            "dest":"/"
+        },
+        {
+            "src":"/authenticate/register",
+            "methods":["POST"],
+            "status":200,
+            "dest":"/"
+        },
+        {
+            "src":"/getexams/timetable",
+            "methods":["POST"],
+            "status":200,
+            "dest":"/"
+        },
+        {
+            "src":"/getexams/result",
+            "methods":["POST"],
+            "status":200,
+            "dest":"/"
+        },
+        {
+            "src":"/queries/getmessages",
+            "methods":["POST"],
+            "status":200,
+            "dest":"/"
+        },
+        {
+            "src":"/queries/addmessage",
             "methods":["POST"],
             "status":200,
             "dest":"/"

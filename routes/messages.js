@@ -2,7 +2,7 @@ const express = require("express");
 const M=require("../models/messeges");
 const route=express.Router();
 var Model;
-route.post("/get",async (req,res)=>{
+route.post("/",async (req,res)=>{
 try {
     if(Model==null)
     Model= M.exp(req.body.clgname+"messages");
@@ -14,6 +14,20 @@ try {
     res.status(400).send("something went wrong").end();
 }
 });
+
+route.post("/getmessages",async (req,res)=>{
+    try {
+        if(Model==null)
+        Model= M.exp(req.body.clgname+"messages");
+        var response= await Model.findOne({uid:req.body.uid},{messages:1,messages:{$slice: -3}}).lean();
+        if(response.length==0)
+        res.status(404).send("not found").end();
+        res.status(200).send(response);
+    } catch (error) {
+        res.status(400).send("something went wrong").end();
+    }
+    });
+
 
 route.post("/addmessage",async (req,res)=>{
 try {
