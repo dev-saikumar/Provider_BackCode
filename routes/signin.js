@@ -10,7 +10,6 @@ route.get("/",async (req,res)=>{
         res.status(404).send("not found").end();
         console.log("here");
         }else{
-        response=response.toJSON();
         res.status(200).json(response).end();
         }
     } catch (error) {
