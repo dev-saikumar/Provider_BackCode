@@ -13,7 +13,10 @@ var studentDetail=new Schema({
     },
     fuid:{
         type: String,
-        unique:true
+        index:{
+            unique:true,
+            partialFilterExpression:{fuid:{$type: "string"}}
+        },
     },
     mobno:{
         type: String,
@@ -21,7 +24,10 @@ var studentDetail=new Schema({
     },
     email:{
         type:String,
-        unique:true
+        index:{
+            unique:true,
+            partialFilterExpression:{fuid:{$type: "string"}}
+        },
     },
     clsname:{
         type: String,

@@ -1,11 +1,9 @@
 const express = require("express");
 const M= require("../models/about");
-const check=require("../models/checkCollege")
 const route= express.Router();
 var Model;
 route.get("/",async (req,res)=>{
     try {
-       
         Model=M.exp(req.query.clgname+"users");
         var response= await Model.findOne({fuid:req.query.fuid}).lean();
         if(response==null){
@@ -19,6 +17,17 @@ route.get("/",async (req,res)=>{
     }
 });
 
+route.get("/save",async (req,res)=>{
+try {
+    Model=M.exp(req.query.clgname+"users");
+    var response = await Model.create({clsname:"2a",uid:"2391",name:"saikumar reddy",mobno:"9989139063",email:null,busno:"0",photourl:"http://loyaltybook.com/wp-content/uploads/2014/11/user.png",rollno:"1",address:"mig-156 aphb colony guntur"});
+    var resu= await response.save();
+    res.send(resu).status(200).end();
+} catch (error) {
+    
+}
+});
+
 route.get("/register",async (req,res)=>{
 try {
         Model=M.exp(req.query.clgname+"users");
@@ -26,7 +35,7 @@ try {
     if(user==null)res.status(404).send("user data not found").end();
     console.log(user);
     user=user.toJSON();
-        if(user.fuid=="0"){
+        if(!(user.hasOwnProperty(fuid))){
         var response= await Model.findOneAndUpdate({"uid":req.query.uid},{$set:{fuid: req.query.fuid,email: req.query.email}},{new:true,useFindAndModify:true});
         res.status(200).send(response).end();
         }
@@ -34,7 +43,7 @@ try {
             res.status(404).send("someone registered").end();
         }
    } catch (error) {
-    res.status(400).send("something went wrong").end();
+    res.status(400).send("something went wrong"+error).end();
 }
 });
 
