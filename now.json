@@ -10,67 +10,56 @@
         {
             "src":"/getexams",
             "methods":["GET"],
-            "status":200,
             "dest":"/"
         },
         {
             "src":"/clstimetable",
-            "status":200, 
             "methods":["GET"],
             "dest":"/"
         },
         {
             "src":"/getteachers",
             "methods":["GET"],
-            "status":200,
             "dest":"/"
         },
         {
             "src":"/homeworks",
             "methods":["GET"],
-            "status":200,
             "dest":"/"
         },
         {
             "src":"/queries",
             "methods":["GET"],
-            "status":200,
             "dest":"/"
         },
         {
             "src":"/authenticate",
             "methods":["GET"],
-            "status":200,
             "dest":"/"
         },
         {
             "src":"/authenticate/register",
             "methods":["GET"],
-            "status":200,
             "dest":"/"
         },
         {
             "src":"/getexams/timetable",
             "methods":["GET"],
-            "status":200,
             "dest":"/"
         },
         {
             "src":"/getexams/result",
             "methods":["GET"],
-            "status":200,
             "dest":"/"
         },
         {
             "src":"/queries/getmessages",
             "methods":["GET"],
-            "status":200,
             "dest":"/"
         },
         {
             "src":"/queries/addmessage",
             "methods":["GET"],
-            "status":200,
             "dest":"/"
         }
     ]
