@@ -1,8 +1,7 @@
 const mongoose= require("mongoose");
+var Schema=mongoose.Schema;
 
-let myfunction= function collect(prefix){
-
-var timetable=mongoose.Schema({
+var timetable=new Schema({
     date:{
         type: String,
         required: true
@@ -21,7 +20,7 @@ var timetable=mongoose.Schema({
     }
 });
 
-var examdetailschema= mongoose.Schema({
+var examdetailschema= new Schema({
 examname:{
     type: String,
     required: true
@@ -40,6 +39,8 @@ enddate:{
 },
 timetable:[timetable],
 });
+
+let myfunction= function collect(prefix){
 return mongoose.model(prefix,examdetailschema,prefix);
 }
 

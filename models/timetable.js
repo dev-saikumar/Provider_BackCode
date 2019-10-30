@@ -1,35 +1,36 @@
 const mongoose = require("mongoose");
+var Schema=mongoose.Schema;
 
-let Myfuntion= function(collection) {
+const daytimetable=new Schema({
+    sub:{
+        type:String,
+        required:true
+    },
+    time:{
+        type:String,
+        required:true
+    },
+    });
 
-    const daytimetable=mongoose.Schema({
-        sub:{
-            type:String,
-            required:true
-        },
-        time:{
-            type:String,
-            required:true
-        },
-        });
-
-const weektimetable= mongoose.Schema({
+const weektimetable= new Schema({
 day:{
-    type: String,
-    required:true,
-    unique: true,
-    enum:['mon','tue','wed','thu','fri','sat']
+type: String,
+required:true,
+unique: true,
+enum:['mon','tue','wed','thu','fri','sat']
 },
 daytimetable:[daytimetable]
 });
 
-const ttschema=mongoose.Schema({
-    clsname:{
-        type: String,
-        required: true
-    },
-    weektimetable:[weektimetable]
-    });
+const ttschema=new Schema({
+clsname:{
+    type: String,
+    required: true
+},
+weektimetable:[weektimetable]
+});
+
+let Myfuntion= function(collection) {
 
     return mongoose.model(collection,ttschema,collection);
 }

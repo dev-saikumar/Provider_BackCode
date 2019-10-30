@@ -7,11 +7,11 @@ var Model2;
 
 route.get("/", async (req, res) => {
   try {
-    if(model1==null)
     model1 = exammodel.exp(req.query.clgname+"exams");
      var response= await model1.find({},{timetable:0});
-      if(response.length==0)
+      if(response.length==0){
       res.status(404).send("notfound").end();
+      }else
     res.status(200).send(response);
   } catch (error){
     res.status(404).error;
@@ -20,31 +20,29 @@ route.get("/", async (req, res) => {
 
 route.get("/timetable",async (req,res)=>{
 try {
-  if(model1==null)
   model1 = exammodel.exp(req.query.clgname+"exams");
  var response= await model1.findOne({"examname":req.query.examname}).lean();
  if(response==null)
  res.status(404).send("notfound").end();
+ else
  res.status(200).send(response);
 } catch (error) {
-  
+  res.status(404).error;
 }
 });
 
 route.get("/result",async (req,res)=>{
   try {
     console.log("came");
-    if(Model2==null){
     Model2=resultmodel.exp(req.query.clgname+"results");
-    console.log("cameddd");  
-  }
     console.log("started");
    var response= await Model2.findOne({"uid":req.query.uid,"results.examname":req.query.examname},{"results.examname.$":1,"results":1}).lean();
    if(response==null)
    res.status(404).send("notfound").end();
+   else
    res.status(200).send(response);
   } catch (error) {
-    
+    res.status(404).error;
   }
   });
 
