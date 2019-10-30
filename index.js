@@ -25,7 +25,7 @@ app.use("/getteachers",teacherinfo);
 app.use("/homeworks",gethomeworks);
 app.use("/authenticate",auth);
 app.use("/queries",querries);
-var url=process.env.dontKnow;
+var url=process.env.dontKnoww;
 mongoose.connect(url,{useNewUrlParser: true,useUnifiedTopology: true},(err,client)=>{
 if(!err){
      app.listen("3001",()=>{
