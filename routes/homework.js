@@ -14,7 +14,7 @@ route.get("/",async (req,res)=>{
         res.status(200).send(about).end();
     } catch (error) {
         console.log("error");
-        res.status(404).send("total wrong").end();
+        res.status(400).send("total wrong").end();
     }
 });
 module.exports=route;

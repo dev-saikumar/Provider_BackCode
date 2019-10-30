@@ -15,29 +15,25 @@ route.get("/", async (req, res) => {
       }else
     res.status(200).send(response);
  } catch (error){
-    res.status(404).error;
+    res.status(400).error;
   }
 });
 
 route.get("/timetable",async (req,res)=>{
-try {
-  if(check.checkClg(req.query.clgname)){
+try{
   model1 = exammodel.exp(req.query.clgname+"exams");
  var response= await model1.findOne({"examname":req.query.examname}).lean();
  if(response==null)
  res.status(404).send("notfound").end();
  else
  res.status(200).send(response);
-}else
-res.status(404).send("what are you trying to do !! caught you").end();
 } catch (error) {
-  res.status(404).error;
+  res.status(400).error;
 }
 });
 
 route.get("/result",async (req,res)=>{
   try {
-    if(check.checkClg(req.query.clgname)){
     console.log("came");
     Model2=resultmodel.exp(req.query.clgname+"results");
     console.log("started");
@@ -46,10 +42,8 @@ route.get("/result",async (req,res)=>{
    res.status(404).send("notfound").end();
    else
    res.status(200).send(response);
-  }else
-  res.status(404).send("what are you trying to do !! caught you").end();
   } catch (error) {
-    res.status(404).error;
+    res.status(400).error;
   }
   });
 

@@ -14,7 +14,7 @@ const check=require('./models/checkCollege');
 app.use(bodyparser.json());
 app.use((req,res,next)=>{
 if(!check.checkClg(req.query.clgname)){
-    res.status(404).send("what are you try to do baby").end();
+    res.status(401).send("what are you try to do baby").end();
 }else
 next()
 });

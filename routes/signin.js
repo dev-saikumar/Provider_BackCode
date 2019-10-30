@@ -9,7 +9,7 @@ route.get("/",async (req,res)=>{
         Model=M.exp(req.query.clgname+"users");
         var response= await Model.findOne({fuid:req.query.fuid}).lean();
         if(response==null){
-        res.status(400).send("not found").end();
+        res.status(404).send("not found").end();
         console.log("here");
         }else
         res.status(200).send(response).end();
@@ -34,7 +34,7 @@ try {
             res.status(404).send("someone registered").end();
         }
    } catch (error) {
-    res.status(404).send("something went wrong").end();
+    res.status(400).send("something went wrong").end();
 }
 });
 
