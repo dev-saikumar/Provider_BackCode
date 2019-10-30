@@ -9,8 +9,10 @@ route.get("/",async (req,res)=>{
         if(response==null){
         res.status(404).send("not found").end();
         console.log("here");
-        }else
-        res.status(200).send(response).end();
+        }else{
+        response=response.toJSON();
+        res.status(200).json(response).end();
+        }
     } catch (error) {
         console.log("error")
         res.status(400).send(error).end();
