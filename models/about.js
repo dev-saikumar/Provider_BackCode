@@ -13,21 +13,19 @@ var studentDetail=new Schema({
     },
     fuid:{
         type: String,
-        default:"0",
         unique:true
     },
     mobno:{
-        type: Number,
+        type: String,
         required:true,
     },
     email:{
         type:String,
-        default:"0",
         unique:true
     },
     clsname:{
         type: String,
-        required:true
+        default:"0"
     },
     busno:{
         type: String,
@@ -43,7 +41,7 @@ var studentDetail=new Schema({
     },
     rollno:{
         type: Number,
-        required:true
+        default:"0"
     },
     address:{
         type: String,
