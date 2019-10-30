@@ -1,6 +1,7 @@
 const express = require("express");
 const exammodel = require("../models/exams");
 const resultmodel = require('../models/results');
+const check=require("../models/checkCollege");
 const route = express.Router();
 var model1;
 var Model2;
@@ -13,19 +14,22 @@ route.get("/", async (req, res) => {
       res.status(404).send("notfound").end();
       }else
     res.status(200).send(response);
-  } catch (error){
+ } catch (error){
     res.status(404).error;
   }
 });
 
 route.get("/timetable",async (req,res)=>{
 try {
+  if(check.checkClg(req.query.clgname)){
   model1 = exammodel.exp(req.query.clgname+"exams");
  var response= await model1.findOne({"examname":req.query.examname}).lean();
  if(response==null)
  res.status(404).send("notfound").end();
  else
  res.status(200).send(response);
+}else
+res.status(404).send("what are you trying to do !! caught you").end();
 } catch (error) {
   res.status(404).error;
 }
@@ -33,6 +37,7 @@ try {
 
 route.get("/result",async (req,res)=>{
   try {
+    if(check.checkClg(req.query.clgname)){
     console.log("came");
     Model2=resultmodel.exp(req.query.clgname+"results");
     console.log("started");
@@ -41,6 +46,8 @@ route.get("/result",async (req,res)=>{
    res.status(404).send("notfound").end();
    else
    res.status(200).send(response);
+  }else
+  res.status(404).send("what are you trying to do !! caught you").end();
   } catch (error) {
     res.status(404).error;
   }
