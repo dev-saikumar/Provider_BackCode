@@ -29,12 +29,16 @@ cls:{
     default:"0"
 },
 busno:{
-    type: Number,
+    type: String,
     default:"0"
+},
+clgname:{
+    type:String,
+    required:true
 },
 photourl:{
     type: String,
-    default:"0"
+    default:""
 },
 rollno:{
     type: Number,

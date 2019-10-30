@@ -3,10 +3,10 @@ const route= express.Router();
 const M= require('../models/teacherinfo');
 var model;
 
-route.post("/",async (req,res)=>{
+route.get("/",async (req,res)=>{
     try{
         if(model==null)
-        model=M.exp(req.body.clgname+"teacherinfo");
+        model=M.exp(req.query.clgname+"teacherinfo");
         console.log("11");
         var response= await model.find({},{timetable:0}).limit(15).lean();
         console.log("22");

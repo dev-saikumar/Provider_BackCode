@@ -2,11 +2,11 @@ const express = require("express");
 const M=require("../models/messeges");
 const route=express.Router();
 var Model;
-route.post("/",async (req,res)=>{
+route.get("/",async (req,res)=>{
 try {
     if(Model==null)
-    Model= M.exp(req.body.clgname+"messages");
-    var response= await Model.find({uid:req.body.uid},{messages: 0}).sort({_id:-1}).limit(15).lean();
+    Model= M.exp(req.query.clgname+"messages");
+    var response= await Model.find({uid:req.query.uid},{messages: 0}).sort({_id:-1}).limit(15).lean();
     if(response.length==0)
     res.status(404).send("not found").end();
     res.status(200).send(response);
@@ -15,11 +15,11 @@ try {
 }
 });
 
-route.post("/getmessages",async (req,res)=>{
+route.get("/getmessages",async (req,res)=>{
     try {
         if(Model==null)
-        Model= M.exp(req.body.clgname+"messages");
-        var response= await Model.findOne({uid:req.body.uid},{messages:1,messages:{$slice: -3}}).lean();
+        Model= M.exp(req.query.clgname+"messages");
+        var response= await Model.findOne({uid:req.query.uid},{messages:1,messages:{$slice: -3}}).lean();
         if(response.length==0)
         res.status(404).send("not found").end();
         res.status(200).send(response);
@@ -29,17 +29,17 @@ route.post("/getmessages",async (req,res)=>{
     });
 
 
-route.post("/addmessage",async (req,res)=>{
+route.get("/addmessage",async (req,res)=>{
 try {
     if(Model==null)
-    Model=M.exp(req.body.clgname+"messages");
+    Model=M.exp(req.query.clgname+"messages");
     // Model.messages.push({
     //     message: req.body.msg,
     //     senderuid: req.body.sender
     // });
    //var response= await Model.save();
     console.log("entered");
-    var response= await Model.update({uid:req.body.uid},{$push:{messages:{"message":req.body.message,"senderuid":req.body.sender}}});
+    var response= await Model.update({uid:req.query.uid},{$push:{messages:{"message":req.query.message,"senderuid":req.query.sender}}});
     if(response==null)
     res.status(404).send("something w wrong").end();
     res.status(200).send(response).end();

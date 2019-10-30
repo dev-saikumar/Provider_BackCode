@@ -3,73 +3,73 @@
     "builds":[
         {
             "src":"./index.js",
-            "use":"@now/node-server@0.4.26"
+            "use":"@now/node@canary"
         }
     ],
     "routes":[
         {
             "src":"/getexams",
-            "methods":["POST"],
+            "methods":["GET"],
             "status":200,
             "dest":"/"
         },
         {
             "src":"/clstimetable",
             "status":200, 
-            "methods":["POST"],
+            "methods":["GET"],
             "dest":"/"
         },
         {
             "src":"/getteachers",
-            "methods":["POST"],
+            "methods":["GET"],
             "status":200,
             "dest":"/"
         },
         {
             "src":"/homeworks",
-            "methods":["POST"],
+            "methods":["GET"],
             "status":200,
             "dest":"/"
         },
         {
             "src":"/queries",
-            "methods":["POST"],
+            "methods":["GET"],
             "status":200,
             "dest":"/"
         },
         {
             "src":"/authenticate",
-            "methods":["POST"],
+            "methods":["GET"],
             "status":200,
             "dest":"/"
         },
         {
             "src":"/authenticate/register",
-            "methods":["POST"],
+            "methods":["GET"],
             "status":200,
             "dest":"/"
         },
         {
             "src":"/getexams/timetable",
-            "methods":["POST"],
+            "methods":["GET"],
             "status":200,
             "dest":"/"
         },
         {
             "src":"/getexams/result",
-            "methods":["POST"],
+            "methods":["GET"],
             "status":200,
             "dest":"/"
         },
         {
             "src":"/queries/getmessages",
-            "methods":["POST"],
+            "methods":["GET"],
             "status":200,
             "dest":"/"
         },
         {
             "src":"/queries/addmessage",
-            "methods":["POST"],
+            "methods":["GET"],
             "status":200,
             "dest":"/"
         }
