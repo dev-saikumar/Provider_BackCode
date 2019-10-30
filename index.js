@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+require("dotenv/config");
 const app= express();
 const getexams=require("./routes/exam");
 const timetable=require("./routes/timatable");
@@ -24,7 +25,8 @@ app.use("/getteachers",teacherinfo);
 app.use("/homeworks",gethomeworks);
 app.use("/authenticate",auth);
 app.use("/queries",querries);
-mongoose.connect('mongodb+srv://couboidsclub:audibenz@cluster0-ax1bc.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true,useUnifiedTopology: true},(err,client)=>{
+var url=process.env.dontKnow;
+mongoose.connect(url,{useNewUrlParser: true,useUnifiedTopology: true},(err,client)=>{
 if(!err){
      app.listen("3001",()=>{
         console.log("server listening");

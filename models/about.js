@@ -18,15 +18,16 @@ var studentDetail=new Schema({
     },
     mobno:{
         type: Number,
-        default:"0"
+        required:true,
     },
     email:{
         type:String,
-        default:"0"
+        default:"0",
+        unique:true
     },
-    cls:{
+    clsname:{
         type: String,
-        default:"0"
+        required:true
     },
     busno:{
         type: String,
@@ -38,15 +39,15 @@ var studentDetail=new Schema({
     },
     photourl:{
         type: String,
-        default:""
+        default:"http://loyaltybook.com/wp-content/uploads/2014/11/user.png"
     },
     rollno:{
         type: Number,
-        default:"0"
+        required:true
     },
     address:{
         type: String,
-        default:"0"
+        required:true
     }
     });    
 
