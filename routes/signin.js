@@ -36,8 +36,10 @@ try {
     if(user==null)res.status(404).send("user data not found").end();
     console.log(user);
     user=user.toJSON();
-        if(!(user.hasOwnProperty(fuid))){
-        var response= await Model.findOneAndUpdate({"uid":req.query.uid},{$set:{fuid: req.query.fuid,email: req.query.email,photourl:req.query.photourl}},{new:true,useFindAndModify:true});
+    console.log(user.fuid);   
+        if(user.fuid==undefined){
+        console.log("cememe");
+        var response= await Model.findOneAndUpdate({"uid":req.query.uid},{$set:{fuid: req.query.fuid,email: req.query.email},$setOnInsert:{photourl:req.query.photourl}},{new:true,upsert:true,useFindAndModify:true});
         res.status(200).send(response).end();
         }
         else{
