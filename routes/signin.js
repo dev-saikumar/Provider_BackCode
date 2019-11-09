@@ -39,7 +39,7 @@ try {
     console.log(user.fuid);   
         if(user.fuid==undefined){
         console.log("cememe");
-        var response= await Model.findOneAndUpdate({"uid":req.query.uid},{$set:{fuid: req.query.fuid,email: req.query.email},$setOnInsert:{photourl:req.query.photourl}},{new:true,upsert:true,useFindAndModify:true});
+        var response= await Model.findOneAndUpdate({"uid":req.query.uid},{$set:{fuid: req.query.fuid,email: req.query.email}},{new:true,upsert:true,useFindAndModify:true});
         res.status(200).send(response).end();
         }
         else{
