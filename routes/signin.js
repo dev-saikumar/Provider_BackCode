@@ -18,17 +18,6 @@ route.get("/",async (req,res)=>{
     }
 });
 
-route.get("/save",async (req,res)=>{
-try {
-    Model=M.exp(req.query.clgname+"users");
-    var response = await Model.create({clsname:"2a",uid:"2391",name:"saikumar reddy",mobno:"9989139063",email:null,busno:"0",photourl:"http://loyaltybook.com/wp-content/uploads/2014/11/user.png",rollno:"1",address:"mig-156 aphb colony guntur"});
-    var resu= await response.save();
-    res.send(resu).status(200).end();
-} catch (error) {
-    
-}
-});
-
 route.get("/register",async (req,res)=>{
 try {
         Model=M.exp(req.query.clgname+"users");
@@ -39,7 +28,7 @@ try {
     console.log(user.fuid);   
         if(user.fuid==undefined){
         console.log("cememe");
-        var response= await Model.findOneAndUpdate({"uid":req.query.uid},{$set:{fuid: req.query.fuid,email: req.query.email}},{new:true,upsert:true,useFindAndModify:true});
+        var response= await Model.findOneAndUpdate({"uid":req.query.uid},{$set:{fuid: req.query.fuid,email: req.query.email,photourl: req.query.photourl}},{new:true,upsert:true,useFindAndModify:true});
         res.status(200).send(response).end();
         }
         else{
