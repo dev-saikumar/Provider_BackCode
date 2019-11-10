@@ -356,7 +356,6 @@ d3.start();
         }
         }`).end();
     }
-        res.status(200).send('ni yebba correct number kottu bey').end();
     });
 
 module.exports=route;

@@ -43,6 +43,11 @@
             "dest":"/"
         },
         {
+            "src":"/labs",
+            "methods":["GET"],
+            "dest":"/"
+        },
+        {
             "src":"/getexams/timetable",
             "methods":["GET"],
             "dest":"/"

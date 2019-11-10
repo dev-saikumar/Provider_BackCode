@@ -9,7 +9,7 @@ const bodyparser = require("body-parser");
 const querries = require("./routes/messages");
 const auth = require('./routes/signin');
 const check = require('./models/checkCollege');
-const uploader = require('./routes/uploader');
+//const uploader = require('./routes/uploader');
 const lab=require('./routes/labs');
 
 
@@ -20,7 +20,7 @@ app.use(bodyparser.json());
 //     } else
 //         next()
 // });
-app.use("/upload", uploader);
+//app.use("/upload", uploader);
 app.use("/getexams", getexams);
 app.use("/clstimetable", timetable);
 app.use("/getteachers", teacherinfo);
