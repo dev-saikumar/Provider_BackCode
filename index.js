@@ -27,7 +27,7 @@ app.use("/getteachers", teacherinfo);
 app.use("/homeworks", gethomeworks);
 app.use("/authenticate", auth);
 app.use("/queries", querries);
-app.use("/",lab);
+app.use("/labs",lab);
 
 mongoose.connect('mongodb+srv://couboidsclub:audibenz@cluster0-ax1bc.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true,

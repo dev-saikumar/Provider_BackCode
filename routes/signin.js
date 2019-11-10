@@ -20,7 +20,6 @@ route.get("/", async (req, res) => {
     }
 });
 
-<<<<<<< HEAD
 route.get("/register", async (req, res) => {
     try {
         Model = M.exp(req.query.clgname + "users");
@@ -51,22 +50,6 @@ route.get("/register", async (req, res) => {
             });
             res.status(200).send(response).end();
         } else {
-=======
-route.get("/register",async (req,res)=>{
-try {
-        Model=M.exp(req.query.clgname+"users");
-    var user= await Model.findOne({uid:req.query.uid},{uid:1,fuid:1});
-    if(user==null)res.status(404).send("user data not found").end();
-    console.log(user);
-    user=user.toJSON();
-    console.log(user.fuid);   
-        if(user.fuid==undefined){
-        console.log("cememe");
-        var response= await Model.findOneAndUpdate({"uid":req.query.uid},{$set:{fuid: req.query.fuid,email: req.query.email,photourl: req.query.photourl}},{new:true,upsert:true,useFindAndModify:true});
-        res.status(200).send(response).end();
-        }
-        else{
->>>>>>> 8026c0c4b5942577374899b50583044a6c9da1f6
             res.status(404).send("someone registered").end();
         }
     } catch (error) {
@@ -74,8 +57,4 @@ try {
     }
 });
 
-<<<<<<< HEAD
 module.exports = route;
-=======
-module.exports =route;
->>>>>>> 8026c0c4b5942577374899b50583044a6c9da1f6
