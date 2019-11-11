@@ -1,61 +1,74 @@
-const mongoose= require("mongoose");
-var Schema=mongoose.Schema;
+const mongoose = require("mongoose");
+var Schema = mongoose.Schema;
 
-var studentDetail=new Schema({
-    name:{
+
+let myFunction = function dynamic_coll(coll_name) {
+var studentDetail = new Schema({
+    name: {
         type: String,
-        required:true
+        required: true
     },
-    uid:{
-        type:String,
-        required:true,
-        unique:true
-    },
-    fuid:{
+    uid: {
         type: String,
-        index:{
-            unique:true,
-            partialFilterExpression:{fuid:{$type: "string"}}
+        required: true,
+        unique: true,
+        sparse:true
+    },
+    fuid: {
+        type: String,
+        index: {
+            unique: true,
+            partialFilterExpression: {
+                fuid: {
+                    $type: "string"
+                }
+            }
         },
     },
-    mobno:{
+    mobno: {
         type: String,
-        required:true,
+        required: true,
     },
-    email:{
-        type:String,
-        index:{
-            unique:true,
-            partialFilterExpression:{fuid:{$type: "string"}}
+    email: {
+        type: String,
+        index: {
+            unique: true,
+            partialFilterExpression: {
+                fuid: {
+                    $type: "string"
+                }
+            }
         },
     },
-    clsname:{
+    clsname: {
         type: String,
-        default:"0"
+        required: true
     },
-    busno:{
+    busno: {
         type: String,
-        default:"0"
+        default: "0"
     },
-    clgname:{
-        type:String,
-        required:true
-    },
-    photourl:{
+    clgname: {
         type: String,
-        default:"http://loyaltybook.com/wp-content/uploads/2014/11/user.png"
+        required: true,
     },
-    rollno:{
+    photourl: {
+        type: String,
+        default: "http://loyaltybook.com/wp-content/uploads/2014/11/user.png"
+    },
+    rollno: {
         type: Number,
-        default:"0"
+        required: true
     },
-    address:{
+    address: {
         type: String,
-        required:true
+        required: true
+    },
+    guardian: {
+        type: String,
+        required: true
     }
-    });    
-
-let myFunction=function dynamic_coll(coll_name){
-return mongoose.model(coll_name,studentDetail,coll_name);
+});
+    return mongoose.model(coll_name, studentDetail, coll_name);
 }
-exports.exp=myFunction;
+exports.exp = myFunction;
