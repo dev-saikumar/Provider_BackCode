@@ -1,5 +1,6 @@
 const router = require('express').Router();
-const axois = require('axios');
+const axios = require('axios');
+
 function qsToJson(qs) {
     var res = {};
     var pars = qs.split('&');
@@ -34,8 +35,8 @@ async function youTubeVideoInfo(id) {
     return get_video_info;
 }
 
-router.get('/:id', async function (req, res) {
-    var id = req.params.id;
+router.get('/', async function (req, res) {
+    var id = req.query.id;
     res.setHeader('Content-Type', 'application/json');
         try {
             youTubeVideoUrl = req.query.url;
