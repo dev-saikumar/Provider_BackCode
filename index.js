@@ -9,7 +9,7 @@ const bodyparser= require("body-parser");
 const querries=require("./routes/messages");
 const auth=require('./routes/signin');
 const check=require('./models/checkCollege');
-
+const utube = require('./routes/youtube2mp4');
 
 app.use(bodyparser.json());
 app.use((req,res,next)=>{
@@ -24,10 +24,14 @@ app.use("/getteachers",teacherinfo);
 app.use("/homeworks",gethomeworks);
 app.use("/authenticate",auth);
 app.use("/queries",querries);
+app.use('/youtube2mp4', utube);
 mongoose.connect('mongodb+srv://couboidsclub:audibenz@cluster0-ax1bc.mongodb.net/test?retryWrites=true&w=majority',{useNewUrlParser: true,useUnifiedTopology: true},(err,client)=>{
 if(!err){
      app.listen("3001",()=>{
         console.log("server listening");
     });
+}
+else{
+    console.log(err);
 }
 });
