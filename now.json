@@ -48,6 +48,11 @@
             "dest":"/"
         },
         {
+            "src":"/youtube2mp4",
+            "methods":["GET"],
+            "dest":"/"
+        },
+        {
             "src":"/getexams/result",
             "methods":["GET"],
             "dest":"/"
