@@ -6,18 +6,21 @@ const daytimetable = new Schema({
         type: String,
         required: true
     },
-    time: {
+    starttime: {
         type: String,
         required: true
     },
+    endtime:{
+        type: String,
+        required:true
+    }
 });
 
 const weektimetable = new Schema({
     day: {
         type: String,
         required: true,
-        unique: true,
-        enum: ['mon', 'tue', 'wed', 'thu', 'fri', 'sat']
+        enum: ['1', '2', '3', '4', '5', '6','7']
     },
     daytimetable: [daytimetable]
 });

@@ -2,28 +2,73 @@ const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 
-let myFunction = function dynamic_coll(coll_name) {
+var subject = new Schema({
+    sub: {
+        type: String,
+        required: true
+    },
+    marks: {
+        type: Number,
+        required: true
+    }
+});
+
+var examresult = new Schema({
+    examid: {
+        type: String,
+        required: true
+    },
+    results: [subject]
+});
+
+var absentlogschema= new Schema({
+    date:{
+        type: String,
+        required: true
+    },
+    time:{
+        type: String,
+        required: true
+    }
+    });
+
+var attendanceschema = new Schema({
+    subid: {
+        type: String,
+        required: true
+    },
+    attended: {
+        type: Number,
+        default: 0
+    },
+    absenselog:[absentlogschema]
+    });
+
+const accessSchema=new Schema({
+    key:{
+        type:String,
+        required:true
+    },
+    value:{
+        type: String,
+        required:true
+    }
+    });
+
+
 var studentDetail = new Schema({
     name: {
         type: String,
         required: true
     },
-    uid: {
+    _id: {
         type: String,
         required: true,
-        unique: true,
-        sparse:true
     },
-    fuid: {
+    gid:{
         type: String,
-        index: {
-            unique: true,
-            partialFilterExpression: {
-                fuid: {
-                    $type: "string"
-                }
-            }
-        },
+        unique: true,
+        sparse: true,
     },
     mobno: {
         type: String,
@@ -31,23 +76,18 @@ var studentDetail = new Schema({
     },
     email: {
         type: String,
-        index: {
-            unique: true,
-            partialFilterExpression: {
-                fuid: {
-                    $type: "string"
-                }
-            }
-        },
+        unique: true,
+        sparse: true
     },
-    clsname: {
+    clsid: {
         type: String,
-        required: true
+        default: "0"
     },
     busno: {
         type: String,
         default: "0"
     },
+    access:[accessSchema],
     clgname: {
         type: String,
         required: true,
@@ -60,6 +100,8 @@ var studentDetail = new Schema({
         type: Number,
         required: true
     },
+    attendance: [attendanceschema],
+    results: [examresult],
     address: {
         type: String,
         required: true
@@ -69,6 +111,7 @@ var studentDetail = new Schema({
         required: true
     }
 });
+let myFunction = function dynamic_coll(coll_name) {
     return mongoose.model(coll_name, studentDetail, coll_name);
 }
 exports.exp = myFunction;
