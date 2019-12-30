@@ -2,6 +2,13 @@ const express = require("express");
 const M = require("../models/timetable");
 const route = express.Router();
 var model;
+
+route.post('/test', (req, res)=>{
+    var name = req.body.name;
+    console.log(name);
+    res.send(name);
+})
+
 route.get("/", async (req, res) => {
     try {
         model = M.exp(req.query.clgname + "timetable");

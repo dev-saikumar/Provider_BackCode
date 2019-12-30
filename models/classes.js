@@ -28,7 +28,7 @@ const weektimetable = new Schema({
 const clsmembers = new Schema({
     aboutref: {
         type: String,
-        ref: clg_id + 'users'
+        // ref: clg_id + 'users'
     },
     name: {
         type: String,
