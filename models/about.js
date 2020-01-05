@@ -134,7 +134,9 @@ var studentDetail = new Schema({
     attendance: [attendanceschema],
     results: [examresult],
 });
+
 let myFunction = function dynamic_coll(coll_name) {
     return mongoose.model(coll_name, studentDetail, coll_name);
 }
+
 exports.exp = myFunction;
