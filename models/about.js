@@ -21,16 +21,16 @@ var examresult = new Schema({
     results: [subject]
 });
 
-var absentlogschema= new Schema({
-    date:{
+var absentlogschema = new Schema({
+    date: {
         type: String,
         required: true
     },
-    time:{
+    time: {
         type: String,
         required: true
     }
-    });
+});
 
 var attendanceschema = new Schema({
     subid: {
@@ -39,21 +39,44 @@ var attendanceschema = new Schema({
     },
     attended: {
         type: Number,
+        default: 1
+    },
+    absenselog: [absentlogschema]
+});
+
+
+const transactionSchema = new Schema({
+/*timestamp*/
+    ts:{
+    type: String,
+    required:true,
+},
+amount:{
+    type: Number,
+    required:true
+},
+mode:{
+    type: String,
+    required:true,
+    enum:['cash','online']
+},
+});
+const feeSchema = new Schema({
+    feeid: {
+        type: String,
+        required: true
+    },
+    paid: {
+        type: Boolean,
+        default: false
+    },
+    concession: {
+        type: Number,
         default: 0
     },
-    absenselog:[absentlogschema]
-    });
-
-const accessSchema=new Schema({
-    key:{
-        type:String,
-        required:true
-    },
-    value:{
-        type: String,
-        required:true
-    }
-    });
+    /*transaction history*/
+    logs: [transactionSchema]
+});
 
 
 var studentDetail = new Schema({
@@ -65,7 +88,7 @@ var studentDetail = new Schema({
         type: String,
         required: true,
     },
-    gid:{
+    gid: {
         type: String,
         unique: true,
         sparse: true,
@@ -76,8 +99,7 @@ var studentDetail = new Schema({
     },
     email: {
         type: String,
-        unique: true,
-        sparse: true
+        default:'0'
     },
     clsid: {
         type: String,
@@ -87,8 +109,8 @@ var studentDetail = new Schema({
         type: String,
         default: "0"
     },
-    access:[accessSchema],
-    clgname: {
+    access: [String],
+    clgid: {
         type: String,
         required: true,
     },
@@ -98,10 +120,8 @@ var studentDetail = new Schema({
     },
     rollno: {
         type: Number,
-        required: true
+        default:0
     },
-    attendance: [attendanceschema],
-    results: [examresult],
     address: {
         type: String,
         required: true
@@ -109,7 +129,10 @@ var studentDetail = new Schema({
     guardian: {
         type: String,
         required: true
-    }
+    },
+    fee: [feeSchema],
+    attendance: [attendanceschema],
+    results: [examresult],
 });
 
 let myFunction = function dynamic_coll(coll_name) {

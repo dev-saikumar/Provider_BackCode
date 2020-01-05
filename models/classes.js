@@ -3,7 +3,12 @@ var Schema = mongoose.Schema;
 var objectid = mongoose.Types.ObjectId;
 
 const daytimetable = new Schema({
-    sub: {
+    uid:{
+        type:mongoose.SchemaTypes.ObjectId,
+        required:true,
+        auto:true
+    },
+    subid: {
         type: String,
         required: true
     },
@@ -16,6 +21,8 @@ const daytimetable = new Schema({
     }
 });
 
+
+
 const weektimetable = new Schema({
     day: {
         type: String,
@@ -25,26 +32,30 @@ const weektimetable = new Schema({
     daytimetable: [daytimetable]
 });
 
-const clsmembers = new Schema({
-    aboutref: {
-        type: String,
-        // ref: clg_id + 'users'
-    },
-    name: {
+const resourceslog = new Schema({
+    createdate: {
         type: String,
         required: true
+    },
+    link: {
+        type: String,
+        required: true,
+    },
+    name: {
+        type: String
     }
 });
 
-const attendancelog = new Schema({
-    subid:{
-        type:String,
-        required:true
+const subjectlog = new Schema({
+    subid: {
+        type: String,
+        required: true
     },
-    tclasses:{
+    resources: [resourceslog],
+    tclasses: {
         type: Number,
         required: true,
-        default: 0
+        default: 1
     }
 });
 
@@ -53,12 +64,12 @@ const classes = new Schema({
         type: String,
         required: true
     },
-    attendance: [attendancelog],
+    subjects: [subjectlog],
     timetable: [weektimetable],
-    clsmembers: [clsmembers],
+    members: [String],
 });
-let myFunction = function classesschema(clg_name) {
-    return mongoose.model(clg_name + 'classes', classes, clg_name + 'classes');
+let myFunction = function classesschema(coll_name) {
+    return mongoose.model(coll_name, classes, coll_name);
 }
 
 exports.exp = myFunction;

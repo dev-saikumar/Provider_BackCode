@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 const daytimetable = new Schema({
-    sub: {
+    subid: {
         type: String,
         required: true
     },

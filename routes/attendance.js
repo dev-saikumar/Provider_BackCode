@@ -1,17 +1,17 @@
-const express = require("express");
+const router = require("express").Router();
 const M = require("../models/about");
 const M1 = require('../models/classes');
 const mongoose = require('mongoose');
-const route = express.Router();
+const M2 = require('../models/collegemetadate');
 
 var model;
 var model1;
+var model2
 
-route.get("/", async (req, res) => {
-    console.log(`${req.query.clg_id}, ${req.query.uid}, ${req.query.clsid}`);
-    // res.send(`${req.query.clg_id}, ${req.query.uid}, ${req.query.clsid}`);
-    model = M.exp(req.query.clg_id + "users");
-    model1 = M1.exp(req.query.clg_id + "classes");
+router.get("/", async (req, res) => {
+    model = M.exp(req.query.clgid + "users");
+    model1 = M1.exp(req.query.clgid + "classes");
+    model2 = M2.exp(0, req.query.clgid + metadata);
     try {
         var present = await model.findOne({
             _id: req.query.uid
@@ -22,17 +22,35 @@ route.get("/", async (req, res) => {
         if (about == null)
             res.status(404).send("something went wrong").end();
         else {
-            try {
-                const total = await model1.findOne({
+            var subarr = [];
+            present.attendance.forEach(element => {
+                subarr.push(element.subid);
+            });
+            Promise.all([
+                model1.findOne({
                     _id: req.query.clsid
                 }, {
                     attendance: 1
-                }).lean();
-                const result = { 'present': present.attendance, 'total': total.attendance }
-                res.status(200).send(result).end();
-            } catch (error) {
-                res.status(400).send("something went wrong").end();
-            }
+                }).lean(),
+                model2.findOne({
+                    name: 'subjects',
+                    'subjects.subid': {
+                        $in: subarr
+                    }
+                }, {
+                    'subjects.$': 1
+                }).lean()
+            ]).then(([total, subjectarr]) => {
+                if (total != null && subjectarr != null) {
+                    res.status(200).json({
+                        'present': present.attendance,
+                        'total': total.attendance,
+                        'subjects': subjectarr.subjects
+                    }).end()
+                }
+            }).catch((err) => {
+                res.send(404).send('something went wrong');
+            });
         }
     } catch (error) {
         console.log("error");
@@ -40,8 +58,8 @@ route.get("/", async (req, res) => {
     }
 });
 
-route.get('/absencelog', async (req, res) => {
-    model = M.exp(req.query.clg_id + 'users');
+router.get('/absencelog', async (req, res) => {
+    model = M.exp(req.query.clgid + 'users');
     try {
         var result = model.findOne({
             _id: req.query.uid,
@@ -49,22 +67,13 @@ route.get('/absencelog', async (req, res) => {
         }, {
             'attendance.absencelog': 1
         }).lean();
-        res.send(result).status(200).end();
+        if (result != null)
+            res.send(result).status(200).end();
+        else
+            res.status(404).send('not found').end();
     } catch (error) {
         res.send("something went wrong").status(400).end();
     }
 });
 
-route.post('/updatendance', async (req, res) => {
-    model = M.exp(req.query.clg_id + 'users');
-    try {
-        var session = await mongoose.startSession();
-        session.startTransaction();
-        model.updateMany({ _id: [] })
-    } catch (error) {
-        await session.abortTransaction();
-        res.send("something went wrong try again").status(400).end();
-    }
-});
-
-module.exports = route;
+module.exports = router;

@@ -1,17 +1,36 @@
 const mongoose = require('mongoose');
-const schema = mongoose.Schema;
+var Schema= mongoose.Schema;
 
-var event = schema({
-    title: String,
-    description: String,
-    image: String,
-    host: String,
-    branch: [String],
-    fee: String,
-    time: String,
-    year: [String]
+const eventModel=Schema({
+name:{
+    type:String,
+    required: true
+},
+clgid:{
+    type:String,
+    required:true,
+    index:true
+},
+ts:{
+    type:String,
+    required: true
+},
+venue:{
+    type:String,
+    required:true
+},
+image:{
+    type:String,
+    required:true
+},
+details:{
+    type:String,
+    required:true
+},
+loc:{
+    type:[Number],
+    index: '2d'
+}
 });
 
-module.exports = function(name){
-    return mongoose.model(name, event, name);
-}
+module.exports= mongoose.model('events',eventModel,'events');

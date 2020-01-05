@@ -1,21 +1,13 @@
-const express = require("express");
+const router = require("express").Router();
 const M = require("../models/timetable");
-const route = express.Router();
 var model;
-
-route.post('/test', (req, res)=>{
-    var name = req.body.name;
-    console.log(name);
-    res.send(name);
-})
-
-route.get("/", async (req, res) => {
+router.get("/", async (req, res) => {
     try {
         model = M.exp(req.query.clgname + "timetable");
         const response = await model.findOne({
-            "clsname": req.query.clsname
+            "_id": req.query.clsid
         }).select({
-            weektimetable: 1
+            timetable: 1
         }).lean();
         if (response == null)
             res.status(404).send("nothing found").end();
@@ -25,4 +17,4 @@ route.get("/", async (req, res) => {
         res.status(400).send(error).end();
     }
 });
-module.exports = route;
+module.exports = router;
