@@ -1,13 +1,13 @@
 const express = require("express");
 const exammodel = require("../models/exams&results");
 const check = require("../models/checkCollege");
-const route = express.Router();
+const router = express.Router();
 var model1;
 
-route.get("/getexams", async (req, res) => {
+router.get("/listexams", async (req, res) => {
   try {
     const arr = req.query.access;
-    model1 = exammodel.exp(req.query.clg_id + "exams");
+    model1 = exammodel.exp(req.query.clgid + "exams");
     var response = await model1.find({
       'access.key': {
         $in: arr
@@ -20,13 +20,13 @@ route.get("/getexams", async (req, res) => {
     } else
       res.status(200).send(response);
   } catch (error) {
-    res.status(400).error;
+    res.status(400);
   }
 });
 
-route.get("/timetable", async (req, res) => {
+router.get("/timetable", async (req, res) => {
   try {
-    model1 = exammodel.exp(req.query.clg_id + "exams");
+    model1 = exammodel.exp(req.query.clgid + "exams");
     var response = await model1.findOne({
       "_id": req.query.id
     }, {
@@ -37,26 +37,29 @@ route.get("/timetable", async (req, res) => {
     else
       res.status(200).send(response);
   } catch (error) {
-    res.status(400).error;
+    res.status(400);
   }
 });
 
-route.post('/createxam', async (req, res) => {
-  model1 = exammodel.exp(req.body.clg_id + "exams");
+router.post('/createexam', async (req, res) => {
+  model1 = exammodel.exp(req.body.clgid + "exams");
   var arr = [];
+  console.log(req.body.clgid);
   req.body.access.forEach(element => {
     arr.push({
       'key': element
     });
   });
+  console.log(req.body.clgid);
   try {
-    const examdata = model1({
-      'examname': req.body.examname,
-      'startdate': req.body.startdate,
-      'enddate': req.body.enddate,
-      'access': arr,
-      'timetable': req.body.timetable
-    });
+    // const examdata = model1({
+    //   'examname': req.body.examname,
+    //   'startdate': req.body.startdate,
+    //   'enddate': req.body.enddate,
+    //   'access': arr,
+    //   'timetable': req.body.timetable
+    // });
+    res.send("completed"+req.body.clgid).end();
   } catch (error) {
 
   }
@@ -83,4 +86,4 @@ route.post('/createxam', async (req, res) => {
 //   }
 // });
 
-module.exports = route;
+module.exports = router;

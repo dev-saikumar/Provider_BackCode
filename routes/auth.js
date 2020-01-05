@@ -1,8 +1,8 @@
-const express = require("express");
+const router = require("express").Router();
 const M = require("../models/about");
-const route = express.Router();
+const crypto=require('crypto'),algorithm='aes-256-ctr',password = 'd6Fkjh2j3hk';
 var Model;
-route.get("/", async (req, res) => {
+router.get("/signin", async (req, res) => {
     try {
         Model = M.exp(req.query.clg_id + "users");
         var response = await Model.findOne({
@@ -12,7 +12,7 @@ route.get("/", async (req, res) => {
             results: 0,
         }).lean();
         if (response!=null) {
-            if (response.gid == req.query.guid && response.email == req.query.email)
+            if (response.gid == req.query.gid && response.email == req.query.email)
                 res.status(200).json(response).end();
             res.status(404).send("wrong credentials or someone registed already").end();
         } else {
@@ -25,8 +25,22 @@ route.get("/", async (req, res) => {
     }
 });
 
-route.get("/register", async (req, res) => {
-    Model = M.exp(req.query.clg_id + "users");
+function encrypt(text){
+    var cipher = crypto.createCipher(algorithm,password);
+    var crypted = cipher.update(text,'utf8','hex');
+    crypted += cipher.final('hex');
+    return crypted;
+  }
+
+function decrypt(text) {
+    var decipher=crypto.createDecipher(algorithm,password);
+    var decrypt=decipher.update(text,'hex','utf8');
+    decrypt+=decipher.final('utf8');
+    return decrypt;
+}
+
+router.get("/signup", async (req, res) => {
+    Model = M.exp(req.query.clgid + "users");
     var user
     try {
         user = await Model.findOne({
@@ -39,7 +53,9 @@ route.get("/register", async (req, res) => {
         if (user == null){ 
             res.status(404).send("user data not found").end();
         }
-        else if (user.gid == undefined) {
+        else if (user.gid == undefined&&user.email==undefined) {
+            const encstring=encrypt(req.query.uid);
+            if(encstring.substring(0,7)==req.body.pin){
             var response = await Model.findOneAndUpdate({
                 _id: req.query.uid
             }, {
@@ -55,6 +71,9 @@ route.get("/register", async (req, res) => {
                 useFindAndModify: true
             });
             res.status(200).send(response).end();
+        }else{
+            res.status(404).send("pin doesn't matched").end();
+        }
         } else {
             res.status(404).send("someone registered").end();
         }
@@ -63,7 +82,9 @@ route.get("/register", async (req, res) => {
     }
 });
 
-// route.get("/create", async (req, res) => {
+
+
+//  router.get("/create", async (req, res) => {
 //     Model = M.exp(req.query.clg_id + "users");
 //     try {
 //         let user = Model({
@@ -79,10 +100,12 @@ route.get("/register", async (req, res) => {
 //             clgname: "biher",
 //     });
 //      const result= await user.save();
-//      res.send(result).status(200).end();
+    //    const result= encrypt(req.query.text);
+    //    const response=decrypt(result);
+    //     res.send(result+response).status(200).end();
 //     } catch (error) {
-//         res.send("something went wrong").status(404).end();
+//        res.send("something went wrong").status(404).end();
 //     }
-// });
+//  });
 
-module.exports = route;
+module.exports = router;

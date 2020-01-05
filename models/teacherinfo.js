@@ -4,10 +4,11 @@ var Schema=mongoose.Schema;
 const timetable= new Schema({
     sub:{
         type:String,
-        
+        required:true
     },
-    clsname:{
+    clsid:{
         type:String,
+        required: true
         }
     });
     
@@ -28,7 +29,7 @@ const timetable= new Schema({
     timetable:[timetable]
     });
 
-let myfunction=function teacherinfo(coll_name) {
+let myfunction=function info(coll_name) {
 
 return mongoose.model(coll_name,teacherinfo,coll_name);
 }

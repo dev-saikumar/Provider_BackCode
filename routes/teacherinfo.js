@@ -1,9 +1,8 @@
-const express = require("express");
-const route= express.Router();
+const router = require("express").Router();
 const M= require('../models/teacherinfo');
 var model;
 
-route.get("/",async (req,res)=>{
+router.get("/",async (req,res)=>{
     try{
         model=M.exp(req.query.clgname+"teacherinfo");
         console.log("11");
@@ -18,4 +17,4 @@ route.get("/",async (req,res)=>{
     }
 });
 
-module.exports =route;
+module.exports =router;
