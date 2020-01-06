@@ -12,6 +12,10 @@ logo:{
 address:{
     type: String,
     required:true
+},
+loc:{
+    type:[Number],
+    index: '2d'
 }
 });
 

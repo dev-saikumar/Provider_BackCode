@@ -2,7 +2,10 @@ const router = require('express').Router();
 const clgmodel = require('../../models/collegesmetadata');
 const usermodel = require('../../models/about');
 const clsmodel = require('../../models/classes');
+const clgdatamodel=require('../../models/collegemetadate');
 const mongoose = require('mongoose');
+
+var cls,user,clgdata;
 
 router.get('/registerclg', async (req, res) => {
     try {
@@ -19,8 +22,8 @@ router.get('/registerclg', async (req, res) => {
 
 router.get('/createuser', async (req, res) => {
     try {
-        const usermodel1 = usermodel.exp('biher' + 'users');
-        const userdata = await usermodel1({
+        user = usermodel.exp('biher' + 'users');
+        const userdata = await user({
             name: 'saikumar reddy',
             _id: req.query.uid,
             mobno: '9989139063',
@@ -38,13 +41,11 @@ router.get('/createuser', async (req, res) => {
 
 router.get('/addtoclass', async (req, res) => {
     try {
-        const usermodel1 = usermodel.exp('biher' + 'users');
-        const classmodel = clsmodel.exp('biher' + "classes");
+        user = usermodel.exp('biher' + 'users');
+        cls = clsmodel.exp('biher' + "classes");
         var session = await mongoose.startSession();
         session.startTransaction();
-        if (userexist == true) {
-            console.log('2');
-            const clsresult = await classmodel.updateOne({
+            const clsresult = await cls.updateOne({
                 clsname: req.query.clsname
             }, {
                 $addToSet: {
@@ -57,7 +58,7 @@ router.get('/addtoclass', async (req, res) => {
                 session: session
             }).lean();
             console.log("3" + clsresult);
-            const updateddata = await usermodel1.updateOne({
+            const updateddata = await user.updateOne({
                 _id: req.query.uid
             }, {
                 $set: {
@@ -68,14 +69,29 @@ router.get('/addtoclass', async (req, res) => {
             }).lean();
             await session.commitTransaction();
             res.status(200).json(updateddata).end();
-        } else
-            res.status(404).send("details not found").end();
+
     } catch (err) {
         await session.abortTransaction();
         res.status(400).send("something went wrong" + err).end();
     } finally {
         session.endSession();
     }
+});
+
+router.post('/addsubjects',async (req,res)=>{
+try {
+    clgdata=clgdatamodel.exp(0,'biher'+'metadata');
+    var arr=[];
+    console.log(req.body.subjects);
+    req.body.subjects.forEach(element=>{
+        arr.push({"subname":element});
+    });
+    // const result = await clgdata.updateOne({"name":"subjects"},{$addToSet:{subjects:arr}},{upsert:true}).lean();
+    const response=await clgdata.findOne({name:"subjects","subjects.subid":"5e130130475aee1bada954d9"},{"subjects.$":1}).lean();
+    res.status(200).json(response).end();
+} catch (error) {
+    res.status(400).json("something went wrong"+error).end();
+}
 });
 
 module.exports = router;

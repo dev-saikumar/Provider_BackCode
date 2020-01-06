@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const eventmodel = require('../models/events');
+const eventmodel = require('../../models/events');
 
 router.get('/clgevelist', async (req, res) => {
     try {
