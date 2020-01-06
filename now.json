@@ -63,7 +63,7 @@
         },
         {
             "src":"/college/addsubjects",
-            "methods":["GET"],
+            "methods":["POST"],
             "dest":"/"
         },
         {
