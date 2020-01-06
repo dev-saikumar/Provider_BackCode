@@ -19,7 +19,7 @@ app.use(bodyparser.json());
 // }else
 // next()
 // });
-app.use(express.static(__dirname+'public'));
+app.use(express.static(__dirname+'/public'));
 app.use("/exams", getexams);
 app.use("/timetable", timetable);
 app.use("/getteachers", teacherinfo);
@@ -27,10 +27,6 @@ app.use("/attendance", attendance);
 app.use("/authenticate", auth);
 app.use("/fee", fee);
 app.use('/college', college);
-
-app.get('/*',(req,res)=>{
-    res.status(200).sendfile(__dirname+'public/loaderio-76e7438702a96aad927c35094cb5e093');
-});
 // app.use("/queries",querries);
 mongoose.connect('mongodb+srv://couboidsclub:audibenz@cluster0-ax1bc.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true
