@@ -19,6 +19,7 @@ app.use(bodyparser.json());
 // }else
 // next()
 // });
+app.use(express.static(__dirname+'public'));
 app.use("/exams", getexams);
 app.use("/timetable", timetable);
 app.use("/getteachers", teacherinfo);
