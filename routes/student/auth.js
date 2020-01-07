@@ -56,7 +56,7 @@ router.get("/signup", async (req, res) => {
         if (user == null){ 
             res.status(404).send("user data not found").end();
         }
-        else if (user.gid == undefined&&user.email==undefined) {
+            else if (user.gid == null&&user.email==null) {
             var response = await Model.findOneAndUpdate({
                 _id: req.query.uid
             }, {
