@@ -2,7 +2,7 @@ const router = require("express").Router();
 const M = require("../../models/about");
 const M1 = require('../../models/classes');
 const mongoose = require('mongoose');
-const M2 = require('../../models/collegemetadate');
+const M2 = require('../../models/collegemetadata');
 
 var model;
 var model1;
