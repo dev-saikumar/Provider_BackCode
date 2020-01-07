@@ -28,10 +28,10 @@ app.use("/fee", fee);
 app.use('/college', college);
 // app.use("/queries",querries);
 mongoose.connect('mongodb+srv://couboidsclub:audibenz@cluster0-ax1bc.mongodb.net/test?retryWrites=true&w=majority', {
-    useNewUrlParser: true
+    useNewUrlParser: true,
 }, (err, client) => {
     if (!err) {
-        app.listen("4000", () => {
+        app.listen("3002", () => {
             console.log("server listening");
         });
     } else {
