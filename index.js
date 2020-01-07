@@ -19,7 +19,6 @@ app.use(bodyparser.json());
 // }else
 // next()
 // });
-app.use(express.static(__dirname+'/public'));
 app.use("/exams", getexams);
 app.use("/timetable", timetable);
 app.use("/getteachers", teacherinfo);
@@ -32,7 +31,7 @@ mongoose.connect('mongodb+srv://couboidsclub:audibenz@cluster0-ax1bc.mongodb.net
     useNewUrlParser: true
 }, (err, client) => {
     if (!err) {
-        app.listen("3001", () => {
+        app.listen("4000", () => {
             console.log("server listening");
         });
     } else {
