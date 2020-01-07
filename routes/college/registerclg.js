@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const clgmodel = require('../../models/collegesmetadata');
+const clgmodel = require('../../models/collegeinfo');
 const usermodel = require('../../models/about');
 const clsmodel = require('../../models/classes');
 const mongoose = require('mongoose');

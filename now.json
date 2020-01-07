@@ -66,6 +66,11 @@
             "src":"/queries/addmessage",
             "methods":["GET"],
             "dest":"/"
+        },
+        {
+            "src":"/getclgdata",
+            "methods":["GET"],
+            "dest":"/"
         }
 
     ]

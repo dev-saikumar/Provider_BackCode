@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-
 const subSchema = mongoose.Schema({
     subid: {
         type: mongoose.SchemaTypes.ObjectId,
