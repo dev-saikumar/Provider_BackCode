@@ -6,7 +6,7 @@ router.get("/signin", async (req, res) => {
     try {
         Model = M.exp(req.query.clgid + "users");
         var response = await Model.findOne({
-            _id: req.query.gid
+            gid: req.query.gid
         }, {
             attendance: 0,
             results: 0,
