@@ -38,7 +38,7 @@
             "dest":"/"
         },
         {
-            "src":"/authenticate/register",
+            "src":"/authenticate/signup",
             "methods":["GET"],
             "dest":"/"
         },
