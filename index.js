@@ -29,7 +29,7 @@ app.use("/getteachers", teacherinfo);
 app.use("/attendance", attendance);
 app.use("/authenticate", auth);
 app.use("/fee", fee);
-app.use("/events", events);
+// app.use("/events", events);
 app.use('/college', college);
 app.use('/collegedata', collegeData);
 // app.use("/queries",querries);
