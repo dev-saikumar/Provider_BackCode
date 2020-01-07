@@ -44,7 +44,8 @@ router.get("/signup", async (req, res) => {
     Model = M.exp(req.query.clgid + "users");
     try {
         const encstring=encrypt(req.query.uid);
-        if(encstring.substring(0,7)==req.body.pin){
+        console.log(encstring);
+        if(encstring.substring(0,7)==req.query.pin){
        const user = await Model.findOne({
             _id: req.query.uid
         }, {
