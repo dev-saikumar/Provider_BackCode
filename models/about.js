@@ -114,10 +114,6 @@ var studentDetail = new Schema({
         type: String,
         required: true,
     },
-    photourl: {
-        type: String,
-        default: "http://loyaltybook.com/wp-content/uploads/2014/11/user.png"
-    },
     rollno: {
         type: Number,
         default:0

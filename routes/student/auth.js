@@ -4,16 +4,17 @@ const crypto=require('crypto'),algorithm='aes-256-ctr',password = 'd6Fkjh2j3hk';
 var Model;
 router.get("/signin", async (req, res) => {
     try {
-        Model = M.exp(req.query.clg_id + "users");
+        Model = M.exp(req.query.clgid + "users");
         var response = await Model.findOne({
-            _id: req.query.uid
+            _id: req.query.gid
         }, {
             attendance: 0,
             results: 0,
         }).lean();
         if (response!=null) {
-            if (response.gid == req.query.gid && response.email == req.query.email)
+            if (response.gid == req.query.gid)
                 res.status(200).json(response).end();
+            else
             res.status(404).send("wrong credentials or someone registed already").end();
         } else {
             res.status(404).send("not_found").end();
@@ -41,9 +42,10 @@ function decrypt(text) {
 
 router.get("/signup", async (req, res) => {
     Model = M.exp(req.query.clgid + "users");
-    var user
     try {
-        user = await Model.findOne({
+        const encstring=encrypt(req.query.uid);
+        if(encstring.substring(0,7)==req.body.pin){
+       const user = await Model.findOne({
             _id: req.query.uid
         }, {
             _id: 1,
@@ -54,29 +56,25 @@ router.get("/signup", async (req, res) => {
             res.status(404).send("user data not found").end();
         }
         else if (user.gid == undefined&&user.email==undefined) {
-            const encstring=encrypt(req.query.uid);
-            if(encstring.substring(0,7)==req.body.pin){
             var response = await Model.findOneAndUpdate({
                 _id: req.query.uid
             }, {
                 $set: {
                     gid: req.query.gid,
                     email: req.query.email,
-                    photourl: req.query.photourl
                 }
             }, {
-                fields:{attendance:0,results:0},
+                fields:{attendance:0,results:0,fee:0},
                 new: true,
                 upsert: true,
                 useFindAndModify: true
             });
             res.status(200).send(response).end();
-        }else{
-            res.status(404).send("pin doesn't matched").end();
-        }
         } else {
             res.status(404).send("someone registered").end();
-        }
+        }}
+        else
+          res.status(404).send("uniq id and pin are wrong").end();
     } catch (error) {
         res.status(400).send("something went wrong" + error).end();
     }
@@ -84,7 +82,7 @@ router.get("/signup", async (req, res) => {
 
 
 
-//  router.get("/create", async (req, res) => {
+ router.get("/create", async (req, res) => {
 //     Model = M.exp(req.query.clg_id + "users");
 //     try {
 //         let user = Model({
@@ -100,12 +98,12 @@ router.get("/signup", async (req, res) => {
 //             clgname: "biher",
 //     });
 //      const result= await user.save();
-    //    const result= encrypt(req.query.text);
-    //    const response=decrypt(result);
-    //     res.send(result+response).status(200).end();
+       const result= encrypt(req.query.text);
+       const response=decrypt(result);
+        res.send(result+response).status(200).end();
 //     } catch (error) {
 //        res.send("something went wrong").status(404).end();
 //     }
-//  });
+ });
 
 module.exports = router;

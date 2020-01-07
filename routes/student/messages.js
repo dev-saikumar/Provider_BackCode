@@ -11,7 +11,7 @@
 //             messages: 0
 //         }).sort({
 //             _id: -1
-//         }).limit(15).lean();
+//         }).limit(10).lean();
 //         if (response.length == 0)
 //             res.status(404).send("not found").end();
 //         else

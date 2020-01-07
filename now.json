@@ -33,7 +33,7 @@
             "dest":"/"
         },
         {
-            "src":"/authenticate",
+            "src":"/authenticate/signin",
             "methods":["GET"],
             "dest":"/"
         },
