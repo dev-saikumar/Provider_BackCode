@@ -53,6 +53,20 @@
             "dest":"/"
         },
         {
+            "src":"/college/addtoclass",
+            "methods":["GET"],
+            "dest":"/"
+        },{
+            "src":"/college/registerclg",
+            "methods":["GET"],
+            "dest":"/"
+        },
+        {
+            "src":"/college/addsubjects",
+            "methods":["POST"],
+            "dest":"/"
+        },
+        {
             "src":"/getexams/result",
             "methods":["GET"],
             "dest":"/"

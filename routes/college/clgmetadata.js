@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const mymodel = require('../models/collegemetadata');
-const infomodel = require('../models/collegeinfo');
+const mymodel = require('../../models/collegemetadata');
+const infomodel = require('../../models/collegedata');
 
 router.get('/listcolleges', async (req, res) => {
     try {

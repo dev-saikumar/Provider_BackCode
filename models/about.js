@@ -44,7 +44,6 @@ var attendanceschema = new Schema({
     absenselog: [absentlogschema]
 });
 
-
 const transactionSchema = new Schema({
 /*timestamp*/
     ts:{
@@ -61,6 +60,7 @@ mode:{
     enum:['cash','online']
 },
 });
+
 const feeSchema = new Schema({
     feeid: {
         type: String,

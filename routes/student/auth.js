@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const M = require("../models/about");
+const M = require("../../models/about");
 const crypto=require('crypto'),algorithm='aes-256-ctr',password = 'd6Fkjh2j3hk';
 var Model;
 router.get("/signin", async (req, res) => {

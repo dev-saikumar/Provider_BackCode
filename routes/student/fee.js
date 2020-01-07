@@ -1,6 +1,6 @@
 const router = require('express').Router();
-const fee = require('../models/feestruct');
-const userfee = require('../models/about');
+const fee = require('../../models/feestruct');
+const userfee = require('../../models/about');
 
 router.get("/listfee", async (req, res) => {
     try {

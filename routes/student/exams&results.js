@@ -1,6 +1,6 @@
 const express = require("express");
-const exammodel = require("../models/exams&results");
-const check = require("../models/checkCollege");
+const exammodel = require("../../models/exams&results");
+const check = require("../../models/checkCollege");
 const router = express.Router();
 var model1;
 

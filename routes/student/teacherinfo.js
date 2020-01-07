@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const M= require('../models/teacherinfo');
+const M= require('../../models/teacherinfo');
 var model;
 
 router.get("/",async (req,res)=>{

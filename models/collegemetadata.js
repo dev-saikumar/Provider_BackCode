@@ -10,7 +10,9 @@ const subSchema = mongoose.Schema({
         type: String,
         required: true
     }
-})
+},{
+    _id: false
+});
 
 const subjects = mongoose.Schema({
     name: {
