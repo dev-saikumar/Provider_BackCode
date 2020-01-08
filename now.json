@@ -18,6 +18,11 @@
             "dest":"/"
         },
         {
+            "src":"/authenticate/create",
+            "methods":["GET"],
+            "dest":"/"
+        },
+        {
             "src":"/getteachers",
             "methods":["GET"],
             "dest":"/"
