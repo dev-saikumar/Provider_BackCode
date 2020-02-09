@@ -20,10 +20,7 @@ router.get("/", async (req, res) => {
         }, {
             attendance: 1,
         }).lean();
-<<<<<<< HEAD
-=======
         console.log("333333333333333333");
->>>>>>> 0828e10b06b8772b7b6db5fe40cc87f8131e7a02
         if (present == null)
             res.status(404).send("something went wrong").end();
         else {

@@ -13,15 +13,15 @@ const college = require('./routes/college/registerclg');
 const collegeData = require('./routes/college/clgmetadata');
 const events = require("./routes/student/events");
 app.use(bodyparser.json());
-app.use((req,res,next)=>{
-if(req.originalUrl.substring(0,13)=="/authenticate"){
-next();
-}
-else{
-    
-next()
-}
-});
+// app.use((req,res,next)=>{
+// if(req.originalUrl.substring(0,13)=="/authenticate"){
+// next();
+// }
+// else{
+
+// next()
+// }
+// });
 app.get("/", (req, res)=>{
     res.end("Welcome to the app");
 })
