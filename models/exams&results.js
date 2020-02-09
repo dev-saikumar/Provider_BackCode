@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var timetable = new Schema({
     date: {
-        type: String,
+        type: Date,
         required: true
     },
     subname: {
@@ -20,12 +20,7 @@ var timetable = new Schema({
     },
 });
 
-const accessSchema=new Schema({
-    key:{
-        type:String,
-        required:true
-    },
-});
+
 
 var examdetailschema = new Schema({
     examname: {
@@ -37,14 +32,14 @@ var examdetailschema = new Schema({
         default: Date.now()
     },
     startdate:{
-        type:String,
+        type: Date,
         required:true
     },
     enddate:{
-        type:String,
+        type: Date,
         required:true
     },
-    access: [accessSchema],
+    access: [String],
     timetable: [timetable],
 });
 

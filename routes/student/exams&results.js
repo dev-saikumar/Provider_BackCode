@@ -1,6 +1,6 @@
 const express = require("express");
 const exammodel = require("../../models/exams&results");
-const check = require("../../models/checkCollege");
+const usermodel = require('../../models/about');
 const router = express.Router();
 var model1;
 
@@ -41,6 +41,31 @@ router.get("/timetable", async (req, res) => {
   }
 });
 
+router.get('/getresults', async (req, res) => {
+  const user = usermodel.exp(req.query.clgid + 'users');
+  try {
+    const result = await user.findOne({
+      _id: req.query.uid,
+      "results.update": $and[{
+        $lt: Date(1, 1, req.query.year + 1)
+      }, {
+        $gt: Date(31, 12, req.query.year - 1)
+      }]
+    }, {
+      results: 1
+    }).lean();
+    if(result!=null)
+    res.status(200).send(result.results).end();
+    else
+    res.status(404).send('something went wrong').end();
+  } catch (error) {
+    Console.log("error/getresults:"+error);
+    res.status(400).send('Something went wrong').end();
+  }
+
+});
+
+
 router.post('/createexam', async (req, res) => {
   model1 = exammodel.exp(req.body.clgid + "exams");
   var arr = [];
@@ -59,7 +84,7 @@ router.post('/createexam', async (req, res) => {
     //   'access': arr,
     //   'timetable': req.body.timetable
     // });
-    res.send("completed"+req.body.clgid).end();
+    res.send("completed" + req.body.clgid).end();
   } catch (error) {
 
   }

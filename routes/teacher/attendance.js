@@ -13,7 +13,7 @@ router.post('/updatendance', async (req, res) => {
         session.startTransaction();
         const classupdate = await clsmodel.updateOne({
             _id: req.body.clsid,
-            'subjects.subid': req.body.subid
+            'subjects.sid': req.body.sid
         }, {
             $inc: {
                 "subjects.$.tclasses": 1
@@ -27,7 +27,7 @@ router.post('/updatendance', async (req, res) => {
                 }, {
                     $push: {
                         "attendance": {
-                            subid: req.body.subid,
+                            sid: req.body.sid,
                             attended: 1
                         }
                     }
@@ -38,7 +38,7 @@ router.post('/updatendance', async (req, res) => {
                     $push: {
                         subjects: {
                             tclasses: 1,
-                            subid: req.body.subid
+                            sid: req.body.sid
                         }
                     }
                 }).session(session)
@@ -53,7 +53,7 @@ router.post('/updatendance', async (req, res) => {
                     _id: {
                         $in: req.body.present
                     },
-                    "attendance.subid": req.body.subid
+                    "attendance.sid": req.body.sid
                 }, {
                     $inc: {
                         "attendance.$.attended": 1
@@ -61,7 +61,7 @@ router.post('/updatendance', async (req, res) => {
                 }).session(session),
                 aboutmodel.updateMany({
                     _id: req.body.absent,
-                    "attendance.subid": req.body.subid
+                    "attendance.sid": req.body.sid
                 }, {
                     $push: {
                         "attendance.$.absencelog": {

@@ -1,14 +1,13 @@
 const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
-
 var subject = new Schema({
     sub: {
         type: String,
         required: true
     },
     marks: {
-        type: Number,
+        type: String,
         required: true
     }
 });
@@ -17,6 +16,10 @@ var examresult = new Schema({
     examid: {
         type: String,
         required: true
+    },
+    ts:{
+        type: Date,
+        default: Date.now()
     },
     results: [subject]
 });
@@ -33,11 +36,11 @@ var absentlogschema = new Schema({
 });
 
 var attendanceschema = new Schema({
-    subid: {
+    sid: {
         type: String,
         required: true
     },
-    attended: {
+    tc: {
         type: Number,
         default: 1
     },
@@ -125,6 +128,11 @@ var studentDetail = new Schema({
     guardian: {
         type: String,
         required: true
+    },
+    gender:{
+        type: String,
+        required: true,
+        enum: ['m','f','o'],
     },
     fee: [feeSchema],
     attendance: [attendanceschema],

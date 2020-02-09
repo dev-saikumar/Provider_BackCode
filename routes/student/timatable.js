@@ -1,9 +1,9 @@
 const router = require("express").Router();
-const M = require("../../models/timetable");
+const M = require("../../models/classes");
 var model;
 router.get("/", async (req, res) => {
     try {
-        model = M.exp(req.query.clgname + "timetable");
+        model = M.exp(req.query.clgid + "classes");
         const response = await model.findOne({
             "_id": req.query.clsid
         }).select({

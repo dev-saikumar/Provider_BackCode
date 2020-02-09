@@ -1,54 +1,44 @@
-// const router = require('express').Router();
-// const eventmodel = require('../../models/events');
+const app = require('express');
+const router = app.Router();
+const Eventmodel = require('../../models/events');
 
-// //List of events in a clg
-// router.get('/', async (req, res) => {
-//     try {
-//         const clg_id = req.query.clg_id;
-//         const branch = req.query.branch;
-//         const year = req.query.year;
-//         var data =
-//             await eventmodel(clg_id + "events").find({
-//                 clgid: "biher",
-//                 block: false,
-//                 // access : req.query.access
-//             }
-//             ).then((data) => {
-//                 console.log(`Events list : ${data}`);
-//                 res.send(data);
-//             })
-//     }
-//     catch{
-//         console.log("Please check the connection buddy");
-//         res.send("Smtng went wrong");
-//     }
-// });
+//List of events in a clg
+router.get('/', async (req, res) => {
+    try {
+            const data=await Eventmodel.find({
+                clgid: req.query.clgid,
+                block: false,
+            }
+            );
+            res.status(200).send(data).end();
+    }
+    catch{
+        console.log("Please check the connection buddy");
+        res.status(404).send("Smtng went wrong").end();
+    }
+});
 
-// //Search event with unique id
-// router.get("/search", (req, res) => {
-//     try {
-//         const id = req.query.id;
-//         var data =
-//             await eventmodel("biher" + "events").find({
-//                 $or: [{
-//                     visibility: true
-//                 }, {
-//                     clgid: "biher"
-//                 }],
-//                 _id: id,
-
-//                 block: false,
-//             }
-//             ).then((data) => {
-//                 console.log(`Events list : ${data}`);
-//                 res.send(data);
-//             })
-//     }
-//     catch{
-//         console.log("Please check the connection buddy");
-//         res.send("Smtng went wrong");
-//     }
-// });
+//Search event with unique id
+router.get("/search", async (req, res) => {
+    try {
+        const id = req.query.id;
+        var data =
+            await Eventmodel.find({
+                $or: [{
+                }, {
+                    clgid: "biher"
+                }],
+                _id: id,
+                block: false,
+            }
+            );
+            res.status(200).send(data).end();
+    }
+    catch{
+        console.log("Please check the connection buddy");
+        res.status(404).send("Smtng went wrong").end();
+    }
+});
 
 // router.get('/nearesteves', async (req, res) => {
 //     try {
@@ -73,39 +63,35 @@
 //     }
 // });
 
-// //Creating Event by passing 8 parameters
-// router.get('/create', async (req, res) => {
-//     const clg_id = "biher";
-//     const _id = Math.floor(Math.random() * 90000) + 10000;
-//     try {
-//         var data = await eventmodel(clg_id + "events").create({
-//             _id: _id,
-//             clgid: "biher",
-//             title: "Test Title",
-//             description: "Temp Description",
-//             image: "http://varunvorld.ml/v.jpg",
-//             host: "Linda Medam",
-//             place: "Hungama hall",
-//             time: "Jan 20, 2020",
-//             fee: "Free",
-//             visibility: true,
-//             block: false,
-//             mobile: "9515792944",
-//             email: "contact@dummyevent.com",
-//             access: ["cse-a"]
-//         }).then((doc) => {
-//             console.log(doc);
-//             res.send(`Event created successfully : ${doc}`);
-//         }).catch((err) => {
-//             console.log(err);
-//             res.send(err);
-//         });
-//         res.send(data);
-//     }
-//     catch (err) {
-//         console.log("Creation failed at init stage");
-//         res.send("Thusss..." + err + " is error ");
-//     }
-// })
+//Creating Event by passing 8 parameters
+router.get('/create', async (req, res) => {
+    const clg_id = "biher";
+    const _id = Math.floor(Math.random() * 90000) + 10000;
+    try {
+        Eventmodel.init();
+        const event = Eventmodel({
+            _id: "flutter frame",
+            clgid: "biher",
+            createdby:"falksdjro",
+            title: "Test Title",
+            description: "Temp Description",
+            image: "http://varunvorld.ml/v.jpg",
+            host: "Linda Medam",
+            place: "Hungama hall",
+            loc: "12.9:12.8",
+            time: "Jan 20, 2020",
+            fee: "free",
+            block: false,
+            mobile: "9515792944",
+            email: "contact@dummyevent.com",
+        });
+        const data= await event.save();
+        res.status(200).send(data).end();
+    }
+    catch (err) {
+        console.log("Creation failed at init stage");
+        res.send(`Thusss... ${err} `);
+    }
+});
 
-// module.exports = router;
+module.exports = router;

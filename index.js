@@ -29,15 +29,16 @@ app.use("/getteachers", teacherinfo);
 app.use("/attendance", attendance);
 app.use("/authenticate", auth);
 app.use("/fee", fee);
-// app.use("/events", events);
+app.use("/events", events);
 app.use('/college', college);
 app.use('/collegedata', collegeData);
 // app.use("/queries",querries);
 mongoose.connect('mongodb+srv://couboidsclub:audibenz@cluster0-ax1bc.mongodb.net/test?retryWrites=true&w=majority', {
     useNewUrlParser: true,
+    useUnifiedTopology: true
 }, (err, client) => {
     if (!err) {
-        app.listen("3002", () => {
+        app.listen("4000", () => {
             console.log("server listening");
         });
     } else {
