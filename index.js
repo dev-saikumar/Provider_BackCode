@@ -24,7 +24,7 @@ app.get("/", (req, res)=>{
     res.end("Welcome to the app");
 })
 app.use("/exams", getexams);
-app.use("/timetable", timetable);
+app.use("/clstimetable", timetable);
 app.use("/getteachers", teacherinfo);
 app.use("/attendance", attendance);
 app.use("/authenticate", auth);

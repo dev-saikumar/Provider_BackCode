@@ -4,7 +4,7 @@ const usermodel = require('../../models/about');
 const router = express.Router();
 var model1;
 
-router.get("/listexams", async (req, res) => {
+router.get("/", async (req, res) => {
   try {
     const arr = req.query.access;
     model1 = exammodel.exp(req.query.clgid + "exams");

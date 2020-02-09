@@ -8,7 +8,7 @@
     ],
     "routes":[
         {
-            "src":"/getexams",
+            "src":"/exams",
             "methods":["GET"],
             "dest":"/"
         },
@@ -33,6 +33,19 @@
             "dest":"/"
         },
         {
+            "src":"/attendance",
+            "methods":["GET"],
+            "dest":"/"
+        },{
+            "src":"/attendance/absencelog",
+            "methods":["GET"],
+            "dest":"/"
+        },{
+            "src":"/events",
+            "methods":["GET"],
+            "dest":"/"
+        },
+        {
             "src":"/queries",
             "methods":["GET"],
             "dest":"/"
@@ -48,12 +61,7 @@
             "dest":"/"
         },
         {
-            "src":"/getexams/timetable",
-            "methods":["GET"],
-            "dest":"/"
-        },
-        {
-            "src":"/youtube2mp4",
+            "src":"/exams/timetable",
             "methods":["GET"],
             "dest":"/"
         },
@@ -61,7 +69,8 @@
             "src":"/college/addtoclass",
             "methods":["GET"],
             "dest":"/"
-        },{
+        },
+        {
             "src":"/college/registerclg",
             "methods":["GET"],
             "dest":"/"
@@ -72,7 +81,7 @@
             "dest":"/"
         },
         {
-            "src":"/getexams/result",
+            "src":"/exams/getresults",
             "methods":["GET"],
             "dest":"/"
         },
