@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 
 var timetable = new Schema({
     date: {
-        type: String,
+        type: Date,
         required: true
     },
     id: {

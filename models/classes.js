@@ -1,14 +1,9 @@
 const mongoose = require("mongoose");
 var Schema = mongoose.Schema;
-var objectid = mongoose.Types.ObjectId;
+
 
 const daytimetable = new Schema({
-    uid:{
-        type:mongoose.SchemaTypes.ObjectId,
-        required:true,
-        auto:true
-    },
-    subid: {
+    sid: {
         type: String,
         required: true
     },
@@ -21,19 +16,19 @@ const daytimetable = new Schema({
     }
 });
 
-
-
 const weektimetable = new Schema({
-    day: {
-        type: String,
-        required: true,
-        enum: ['1', '2', '3', '4', '5', '6', '7']
-    },
-    daytimetable: [daytimetable]
+    0:[daytimetable],
+    1:[daytimetable],
+    2:[daytimetable],
+    3:[daytimetable],
+    4:[daytimetable],
+    5:[daytimetable],
+    6:[daytimetable],
+    7:[daytimetable],
 });
 
 const resourceslog = new Schema({
-    createdate: {
+    ts: {
         type: String,
         required: true
     },
@@ -47,12 +42,12 @@ const resourceslog = new Schema({
 });
 
 const subjectlog = new Schema({
-    subid: {
+    sid: {
         type: String,
         required: true
     },
     resources: [resourceslog],
-    tclasses: {
+    tc: {
         type: Number,
         required: true,
         default: 1

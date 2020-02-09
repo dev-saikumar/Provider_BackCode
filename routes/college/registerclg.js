@@ -1,18 +1,20 @@
 const router = require('express').Router();
-const clgmodel = require('../../models/collegedata');
 const usermodel = require('../../models/about');
 const clsmodel = require('../../models/classes');
-const clgdatamodel = require('../../models/collegemetadata');
+const clgdatamodel = require('../../models/collegesmetadata');
 const mongoose = require('mongoose');
 
 var cls, user, clgdata;
 
 router.get('/registerclg', async (req, res) => {
     try {
-        const clgdata = await clgmodel({
+        const clgdata = await clgdatamodel({
             clgname: req.query.clgname,
+            clgid: req.query.clgid,
             logo: 'https://cdn.pixabay.com/photo/2014/03/24/17/14/education-295185_960_720.png',
-            address: req.query.adr
+            contact: {
+                
+            }
         }).save();
         res.send(clgdata).status(200).end();
     } catch (error) {
@@ -86,7 +88,7 @@ router.post('/addsubjects', async (req, res) => {
             arr.push({ "subname": element });
         });
         // const result = await clgdata.updateOne({"name":"subjects"},{$addToSet:{subjects:arr}},{upsert:true}).lean();
-        const response = await clgdata.findOne({ name: "subjects", "subjects.subid": "5e130130475aee1bada954d9" }, { "subjects.$": 1 }).lean();
+        const response = await clgdatamodel.findOne({ name: "subjects", "subjects.sid": "5e130130475aee1bada954d9" }, { "subjects.$": 1 }).lean();
         res.status(200).json(response).end();
     } catch (error) {
         res.status(400).json("something went wrong" + error).end();

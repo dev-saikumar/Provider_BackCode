@@ -3,32 +3,40 @@ var Schema = mongoose.Schema;
 var myschema = {
     type: String,
     required: true
-}
+};
+
 const eventModel = Schema({
     _id: {
-        type: Number,
+        type: String,
         unique: true
     },
-    clgid: myschema,
-    createdby: myschema,
-    title: myschema, description: myschema, image: myschema, host: myschema, place: myschema, time: myschema, fee: myschema, email: myschema,
-    loc: {
-        type: [Number],
-        index: '2d'
+    clgid: {
+        type: String,
+        required: true,
+        index: true
     },
-    visibility: { type: Boolean },
+    createdby: myschema,
+    title: myschema,
+    description: myschema,
+    image: myschema,
+    loc: {
+        type: String
+    },
+    host: myschema,
+    place: myschema,
+    time: myschema,
+    fee: myschema,
+    email: myschema,
     block: {
         type: Boolean,
-    },
-    access: {
-        type: [String]
+        required: true,
+        default: false
     },
     mobile: {
-        type: [String],
+        type: String,
         required: true,
     },
-});
+}, 
+);
 
-module.exports = function (clg) {
-    return mongoose.model('events', eventModel, `${clg}events`);
-} 
+module.exports = mongoose.model('events', eventModel, 'events');
