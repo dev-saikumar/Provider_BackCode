@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
             attendance: 1,
             'attendance.absencelog': 0
         }).lean();
-        if (about == null)
+        if (present == null)
             res.status(404).send("something went wrong").end();
         else {
             var subarr = [];

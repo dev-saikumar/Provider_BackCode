@@ -6,13 +6,13 @@ const daytimetable = new Schema({
         type: String,
         required: true
     },
-    starttime: {
+    start: {
         type: String,
         required: true
     },
-    endtime:{
+    endt: {
         type: String,
-        required:true
+        required: true
     }
 });
 
@@ -20,7 +20,7 @@ const weektimetable = new Schema({
     day: {
         type: String,
         required: true,
-        enum: ['1', '2', '3', '4', '5', '6','7']
+        enum: ['1', '2', '3', '4', '5', '6', '7']
     },
     daytimetable: [daytimetable]
 });
@@ -34,7 +34,6 @@ const ttschema = new Schema({
 });
 
 let Myfuntion = function (collection) {
-
     return mongoose.model(collection, ttschema, collection);
 }
 
