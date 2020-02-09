@@ -6,45 +6,35 @@ var timetable = new Schema({
         type: Date,
         required: true
     },
-    subname: {
+    id: {
         type: String,
         required: true
     },
-    starttime: {
+    start: {
         type: String,
         required: true
     },
-    endtime: {
+    end: {
         type: String,
         required: true
     },
 });
 
-
-
 var examdetailschema = new Schema({
-    examname: {
+    name: {
         type: String,
         required: true
     },
-    createdat:{
+    createdon:{
         type: Date,
         default: Date.now()
     },
-    startdate:{
-        type: Date,
-        required:true
-    },
-    enddate:{
-        type: Date,
-        required:true
-    },
     access: [String],
-    timetable: [timetable],
+    table: [timetable],
 });
 
 let myfunction = function collect(prefix) {
-    return mongoose.model(prefix, examdetailschema, prefix);
+    return mongoose.model(prefix, examdetailschema, `biherexams`);
 }
 
 exports.exp = myfunction;

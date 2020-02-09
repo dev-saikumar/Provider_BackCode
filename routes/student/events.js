@@ -40,28 +40,41 @@ router.get("/search", async (req, res) => {
     }
 });
 
-// router.get('/nearesteves', async (req, res) => {
-//     try {
-//         const result = await eventmodel.find({
-//             loc: {
-//                 $near: {
-//                     $geometry: {
-//                         type: 'Point',
-//                         coordinates: [req.query.longitude, req.query.latitude]
-//                     },
-//                     $maxdistance: parseInt(req.query.distance) * 1000
-//                 }
-//             }
-//         }).limit(5).lean();
-//         if (result.length < 1) {
-//             res.status(404).send('nothing found invalid input');
-//         } else {
-//             res.status(200).send(result).end();
-//         }
-//     } catch (error) {
-//         res.status(400).send('Something went wrong').end();
-//     }
-// });
+//Creating Event by passing 8 parameters
+router.get('/create', async (req, res) => {
+    const clg_id = req.query.clgid;
+    const _id = req.query.id;
+    // const _id = Math.floor(Math.random() * 90000) + 10000;
+    try {
+        eventmodel("events").create({
+            _id: _id,
+            clgid: "biher",
+            createdby: "12121",
+            title: "Test Title",
+            description: "Temp Description",
+            image: "http://varunvorld.ml/v.jpg",
+            host: "Linda Medam",
+            place: "Hungama hall",
+            time: "Jan 20, 2020",
+            fee: "Free",
+            visibility: true,
+            block: false,
+            mobile: "9515792944",
+            email: "contact@dummyevent.com",
+            // access: ["cse-a"]
+        }).then((doc) => {
+            console.log(doc);
+            res.send(`Event created successfully : ${doc}`);
+        }).catch((err) => {
+            console.log(err);
+            res.send(err);
+        });
+    }
+    catch (err) {
+        console.log("Creation failed at init stage");
+        res.send("Thusss..." + err + " is error ");
+    }
+})
 
 //Creating Event by passing 8 parameters
 router.get('/create', async (req, res) => {
