@@ -8,18 +8,26 @@ var model1;
 router.get("/", async (req, res) => {
   try {
     // const arr = req.query.access;
-    const arr = ["cse-d","cse-f"];
-    model1 = exammodel.exp("exams");
+    const arr = ["cse-d", "cse-f"];
+    model1 = exammodel.exp(req.query.clgid + "exams");
     var response = await model1.findOne({
-      "access" : {
-        $in : arr
+      "access": {
+        $in: arr
       }
+
+    }, {
+      access: 0,
+      _id: 0
     }).lean();
     console.log("exams here...");
-    if (response.length == 0) {
+    if (response == null) {
+      console.log("error")
       res.status(404).send("notfound").end();
-    } else
+    } else {
+      console.log("done");
       res.status(200).send(response);
+    }
+
   } catch (error) {
     res.status(400);
   }

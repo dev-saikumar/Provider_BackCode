@@ -6,7 +6,7 @@ var timetable = new Schema({
         type: Date,
         required: true
     },
-    id: {
+    sid: {
         type: String,
         required: true
     },
@@ -25,7 +25,7 @@ var examdetailschema = new Schema({
         type: String,
         required: true
     },
-    createdon:{
+    ts:{
         type: Date,
         default: Date.now()
     },
@@ -34,7 +34,7 @@ var examdetailschema = new Schema({
 });
 
 let myfunction = function collect(prefix) {
-    return mongoose.model(prefix, examdetailschema, `biherexams`);
+    return mongoose.model(prefix, examdetailschema, prefix);
 }
 
 exports.exp = myfunction;

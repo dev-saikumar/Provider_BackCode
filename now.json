@@ -13,6 +13,11 @@
             "dest":"/"
         },
         {
+            "src":"/notifications",
+            "methods":["GET"],
+            "dest":"/"
+        },
+        {
             "src":"/clstimetable",
             "methods":["GET"],
             "dest":"/"

@@ -134,9 +134,13 @@ var studentDetail = new Schema({
         required: true,
         enum: ['m','f','o'],
     },
+    pic:{
+        type:String,
+        default:"https://www.pinclipart.com/picdir/middle/181-1814767_person-svg-png-icon-free-download-profile-icon.png"
+    },
     fee: [feeSchema],
     attendance: [attendanceschema],
-    results: [examresult],
+    results: [examresult],    
 });
 
 let myFunction = function dynamic_coll(coll_name) {
