@@ -104,6 +104,10 @@ var studentDetail = new Schema({
         type: String,
         default:'0'
     },
+    pic:{
+        type: String,
+        default:''
+    },
     clsid: {
         type: String,
         default: "0"
