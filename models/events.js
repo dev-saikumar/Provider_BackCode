@@ -8,7 +8,6 @@ var myschema = {
 const eventModel = Schema({
     _id: {
         type: String,
-        unique: true
     },
     ts:{
         type: Date,
@@ -22,21 +21,23 @@ const eventModel = Schema({
     createdby: myschema,
     title: myschema,
     description: myschema,
-    image: myschema,
+    image: {
+        type: String,
+        default: "https://hire4event.com/blogs/wp-content/uploads/2019/03/best-Event-company-in-Greater-Noida--768x448.jpg"
+    },
     loc: {
         type: String
     },
     host: myschema,
     place: myschema,
     time: {
-        type:Date,
+        type: Date,
         required: true
     },
     fee: myschema,
     email: myschema,
     block: {
         type: Boolean,
-        required: true,
         default: false
     },
     mobile: {

@@ -40,7 +40,7 @@ mongoose.connect('mongodb+srv://couboidsclub:audibenz@cluster0-ax1bc.mongodb.net
     useUnifiedTopology: true
 }, (err, client) => {
     if (!err) {
-        app.listen("4000", () => {
+        app.listen("3000", () => {
             console.log("server listening");
         });
     } else {

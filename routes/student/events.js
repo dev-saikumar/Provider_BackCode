@@ -46,19 +46,17 @@ router.get('/create', async (req, res) => {
     const _id = req.query.id;
     // const _id = Math.floor(Math.random() * 90000) + 10000;
     try {
-        eventmodel("events").create({
+        console.log("1111111111111111khkjhkjhkjh");
+        Eventmodel.create({
             _id: _id,
             clgid: "biher",
             createdby: "12121",
-            title: "Test Title",
-            description: "Temp Description",
-            image: "http://varunvorld.ml/v.jpg",
+            title: "Flutter workshop",
+            description: "Flutter is an open-source mobile application development framework created by Google. It is used to develop applications for Android and iOS, as well as being the primary method of creating applications for Google Fuchsia.",
             host: "Linda Medam",
-            place: "Hungama hall",
-            time: "Jan 20, 2020",
+            place: "Bharath University",
+            time: Date.parse("2020-01-19T18:30:00.000+00:00"),
             fee: "Free",
-            visibility: true,
-            block: false,
             mobile: "9515792944",
             email: "contact@dummyevent.com",
             // access: ["cse-a"]
@@ -66,7 +64,7 @@ router.get('/create', async (req, res) => {
             console.log(doc);
             res.send(`Event created successfully : ${doc}`);
         }).catch((err) => {
-            console.log(err);
+            console.log(err+"khkjhkjhkjh");
             res.send(err);
         });
     }
