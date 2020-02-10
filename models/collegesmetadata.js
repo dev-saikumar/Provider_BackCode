@@ -38,7 +38,8 @@ clgname:{
 },
 clgid:{
     type: String,
-    required:true
+    required:true,
+    unique: true
 },
 logo:{
     type: String,
@@ -51,6 +52,9 @@ loc:{
 },
 subjects:[subSchema],
 access:[accessSchema]
+},
+{
+    _id:false
 }
 );
 

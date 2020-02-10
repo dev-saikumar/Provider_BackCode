@@ -4,7 +4,7 @@ var model;
 
 router.get("/",async (req,res)=>{
     try{
-        model=M.exp(req.query.clgname+"teacherinfo");
+        model=M.exp(req.query.clgid+"teacherinfo");
         console.log("11");
         var response= await model.find({},{timetable:0}).limit(15).lean();
         console.log("22");
