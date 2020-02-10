@@ -17,14 +17,11 @@ const daytimetable = new Schema({
 });
 
 const weektimetable = new Schema({
-    0:[daytimetable],
-    1:[daytimetable],
-    2:[daytimetable],
-    3:[daytimetable],
-    4:[daytimetable],
-    5:[daytimetable],
-    6:[daytimetable],
-    7:[daytimetable],
+    day:{
+        type: Number,
+        enum:[0,1,2,3,4,5,6]
+    },
+    data:[daytimetable]
 });
 
 const resourceslog = new Schema({

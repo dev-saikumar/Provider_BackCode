@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
                     'subjects.res': 0
                 }).lean(),
                 model2.findOne({
-                    _id: req.query.clg_id,
+                    clgid: req.query.clgid,
                     'subjects.sid': {$in:subarr}
                 }).lean()
             ]).then(([total,subjectarr]) => {

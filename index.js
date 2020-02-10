@@ -10,16 +10,18 @@ const fee = require('./routes/student/fee');
 const noti = require('./routes/student/notifications');
 // const querries=require("./routes/messages");
 const auth = require('./routes/student/auth');
-const check = require('./models/checkCollege');
 const college = require('./routes/college/registerclg');
 const collegeData = require('./routes/college/clgmetadata');
 const events = require("./routes/student/events");
 app.use(bodyparser.json());
 // app.use((req,res,next)=>{
-// if(!check.checkClg(req.query.clgname)){
-//     res.status(401).send("what are you try to do baby").end();
-// }else
+// if(req.originalUrl.substring(0,13)=="/authenticate"){
+// next();
+// }
+// else{
+
 // next()
+// }
 // });
 app.get("/", (req, res)=>{
     res.end("Welcome to the app");

@@ -10,6 +10,10 @@ const eventModel = Schema({
         type: String,
         unique: true
     },
+    ts:{
+        type: Date,
+        default: Date.now()
+    },
     clgid: {
         type: String,
         required: true,
@@ -24,7 +28,10 @@ const eventModel = Schema({
     },
     host: myschema,
     place: myschema,
-    time: myschema,
+    time: {
+        type:Date,
+        required: true
+    },
     fee: myschema,
     email: myschema,
     block: {
