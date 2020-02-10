@@ -64,7 +64,7 @@ router.get("/signup", async (req, res) => {
                 $set: {
                     gid: req.query.gid,
                     email: req.query.email,
-                    pic: req.query.picurl
+                    pic: req.query.url
                 }
             }, {
                 fields:{attendance:0,results:0,fee:0},

@@ -7,6 +7,7 @@ const attendance = require("./routes/student/attendance");
 const teacherinfo = require("./routes/student/teacherinfo");
 const bodyparser = require("body-parser");
 const fee = require('./routes/student/fee');
+const noti = require('./routes/student/notifications');
 // const querries=require("./routes/messages");
 const auth = require('./routes/student/auth');
 const college = require('./routes/college/registerclg');
@@ -33,6 +34,7 @@ app.use("/authenticate", auth);
 app.use("/fee", fee);
 app.use("/events", events);
 app.use('/college', college);
+app.use('/notifications', noti);
 app.use('/collegedata', collegeData);
 // app.use("/queries",querries);
 mongoose.connect('mongodb+srv://couboidsclub:audibenz@cluster0-ax1bc.mongodb.net/test?retryWrites=true&w=majority', {
