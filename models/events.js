@@ -26,7 +26,11 @@ const eventModel = Schema({
         default: "https://hire4event.com/blogs/wp-content/uploads/2019/03/best-Event-company-in-Greater-Noida--768x448.jpg"
     },
     loc: {
-        type: String
+        type: {
+            type: String,
+            default: 'Point'
+        },
+        coordinates: [String]
     },
     host: myschema,
     place: myschema,
