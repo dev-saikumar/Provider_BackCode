@@ -37,7 +37,7 @@ app.use('/college', college);
 app.use('/notifications', noti);
 app.use('/collegedata', collegeData);
 // app.use("/queries",querries);
-mongoose.connect('mongodb+srv://couboidsclub:audibenz@cluster0-ax1bc.mongodb.net/test?retryWrites=true&w=majority', {
+mongoose.connect('DB URl', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, (err, client) => {
